@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
+import { useLoaderData } from "react-router-dom";
 
 export default function Github () {
-
+    const data = useLoaderData()
+/*
     const [data, setData] = useState([])
 
     useEffect(() => {
@@ -19,7 +21,9 @@ export default function Github () {
     if (!data) {
         return <p>Loading...</p>
     }
-    
+
+*/
+
     return (
         <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="bg-orange-600 p-6">
@@ -74,4 +78,13 @@ export default function Github () {
         </div>
         </div>
     );
+}
+
+export const gitHubInfoLoader = async () => {
+    const response = await fetch("https://api.github.com/users/AdityaBVerma", {
+            headers: {
+                Authorization: `token ${import.meta.env.VITE_GITHUB_API_TOKEN}`,
+            },
+        })
+    return response.json()
 }
