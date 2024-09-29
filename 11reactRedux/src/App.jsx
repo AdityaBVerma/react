@@ -1,7 +1,10 @@
+import { useSelector } from 'react-redux'
 import AddTodo from './components/AddTodo'
 import Todos from './components/Todos'
 
 function App() {
+
+  const todos = useSelector(state => state.todos)
 
   return (
     <>
@@ -14,9 +17,11 @@ function App() {
             <div className="bg-gray-700 p-6 rounded-lg shadow">
               <AddTodo />
             </div>
-            <div className="bg-gray-700 p-6 rounded-lg shadow">
-              <Todos />
-            </div>
+              {todos.map((todo) =>
+                <div key={todo.id} className="bg-gray-700 p-6 rounded-lg shadow">
+                <Todos todo={todo} />
+                </div>)
+              }            
           </div>
         </div>
       </div>

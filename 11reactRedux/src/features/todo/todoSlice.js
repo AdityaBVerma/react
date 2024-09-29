@@ -26,6 +26,7 @@ const todoSlice = createSlice({
             state.todos = state.todos.filter( (todo) => ( todo.id !== action.payload ) )
         },
         updateTodo: (state, action ) => {
+            console.log(action.payload.text)
             state.todos = state.todos.map((todo)=> ( todo.id === action.payload.id?{...todo, text : action.payload.text }: todo ))
         },
         toggleCompleted: (state, action) => {
