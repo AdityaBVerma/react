@@ -1,10 +1,25 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import AddTodo from './components/AddTodo'
 import Todos from './components/Todos'
+import { useEffect } from 'react'
+import { setTodo } from './features/todo/todoSlice'
 
 function App() {
 
   const todos = useSelector(state => state.todos)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const todo = JSON.parse(localStorage.getItem("todos"))
+    if (todo && todo.length > 0) {
+      dispatch(setTodo(todo))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
+
 
   return (
     <>
